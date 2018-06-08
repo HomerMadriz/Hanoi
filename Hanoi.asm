@@ -64,7 +64,13 @@ Loop2: 	sll $t1, $t2, 2
  	bne $t3, $zero, Load
  	addi $t2, $t2, 1
  	j Loop2
-Load:	
+ 	
+Load:	sll $t2, $t2, 2
+	add $t1, $t2, $a2
+	sw $t3, 0($t1)
+	add $t1, $t2, $a1
+	sw $zero, 0($t1)
+
 	jr $ra 	 
 Exit: 
 	 
