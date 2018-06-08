@@ -8,7 +8,8 @@
 	TorreC: .word 7 8 9 0 0 0 0 0
 	
 .text
-	lui $t0, 4097		# Se carga a t0 la direccion inicial 
+	addi $t0, $zero, 4097
+	sll $t0,$t0,16		# Se carga a t0 la direccion inicial 
 	ori $s0, $t0, 0		# s0 apunta a la direccion donde se ubica la TorreA 
 	ori $s1, $t0, 32	# s1 apunta a la direccion donde se ubica la TorreB 
 	ori $s2, $t0, 64	# s2 apunta a la direccion donde se ubica la TorreC
@@ -22,7 +23,36 @@
 	j Exit
 	
 Hanoi:
+	bne $a0,$zero,Loop
+	jr $ra
 
+Loop:	addi $sp,$sp,-20
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	sw $a2, 12($sp)
+	sw $a3, 16($sp)
+	addi $a0, $a0, -1
+	addi $a2, $s2, 0
+	addi $a3, $s1, 0
+	jal Hanoi
+	lw $ra, 0($sp)
+	lw $a0, 4($sp)
+	lw $a1, 8($sp)
+	lw $a2, 12($sp)
+	lw $a3, 16($sp)
+	addi $sp,$sp,20
+	jal UpdateTop
+	addi $a0, $a0, -1
+	addi $a1, $s2, 0
+	addi $a3, $s0, 0
+	jal Hanoi
+	lw $ra, 0($sp)
+	lw $a0, 4($sp)
+	lw $a1, 8($sp)
+	lw $a2, 12($sp)
+	lw $a3, 16($sp)
+	jr $ra
 	 
 	 	 
 
