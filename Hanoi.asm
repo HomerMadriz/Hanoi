@@ -19,6 +19,7 @@
 	add $a2, $zero, $s1	# a2 representa la torre target
 	add $a3, $zero, $s2	# a3 representa la torre auxiliar
 	add $t1, $zero, 0	# Indicará la posición del disco que este hasta arriba de la Torre
+	add $t2, $zero, 0	# Temporal que será utilizada como indice para acceder a la torre
 	jal Hanoi		# Función recursiva que realizará movimientos entre torres
 	j Exit
 	
@@ -53,11 +54,17 @@ Loop:	addi $sp,$sp,-20
 	lw $a2, 12($sp)
 	lw $a3, 16($sp)
 	jr $ra
-	 
-	 	 
-
-	 	 	 
+	 	 	 	 
 UpdateTop:
- 	 	 
+ 	addi $t1, $zero, 0
+ 	addi $t2, $zero, 0
+Loop2: 	sll $t1, $t2, 2
+ 	add $t1, $t1, $a1
+ 	lw $t3, 0($t1)
+ 	bne $t3, $zero, Load
+ 	addi $t2, $t2, 1
+ 	j Loop2
+Load:	
+	jr $ra 	 
 Exit: 
 	 
