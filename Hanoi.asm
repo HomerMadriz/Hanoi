@@ -3,7 +3,7 @@
 # Descripción: Torres de Hanoi
 
 .data
-	TorreA: .word 1 2 3 4 5 6 7 8 
+	TorreA: .word 1 2 3 4 0 0 0 0 
 	TorreB: .word 0 0 0 0 0 0 0 0 
 	TorreC: .word 0 0 0 0 0 0 0 0 
 	
@@ -14,7 +14,7 @@
 	ori $s1, $t0, 32	# s1 apunta a la direccion donde se ubica la TorreB 
 	ori $s2, $t0, 64	# s2 apunta a la direccion donde se ubica la TorreC
 	
-	addi $a0, $zero, 8	# a0 representa "n" que es el numero de discos 
+	addi $a0, $zero, 4	# a0 representa "n" que es el numero de discos 
 	add $a1, $zero, $s0	# a1 representa la torre source
 	add $a2, $zero, $s2	# a2 representa la torre target
 	add $a3, $zero, $s1	# a3 representa la torre auxiliar
